@@ -15,7 +15,7 @@ class ShowPostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Request the cubit that is injected in [posts.page.dart]
-    final PostsCubit postsCubit = BlocProvider.of<PostsCubit>(context);
+    final PostsCubit postsCubit = context.read<PostsCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(appName),
