@@ -30,19 +30,57 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  provider: ^5.0.0
   json_annotation: ^4.0.1
   dio: ^4.0.0
   equatable: ^2.0.2
   intl: ^0.17.0
-  bloc_test: ^8.0.2
-  mocktail: ^0.1.4
+  fluttertoast: ^8.0.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_flavorizr: ^2.0.0
   build_runner: ^2.0.4
   json_serializable: ^4.1.3
+  bloc_test: ^8.0.2
+  mocktail: ^0.1.4
+  mockito: ^5.0.10
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    dev:
+      app:
+        name: "SecretWall dev"
+
+      android:
+        applicationId: "com.example.apple"
+
+      ios:
+        bundleId: "com.example.apple"
+
+    qa:
+      app:
+        name: "SecretWall qa"
+
+      android:
+        applicationId: "com.example.apple"
+
+      ios:
+        bundleId: "com.example.apple"
+
+    prod:
+      app:
+        name: "SecretWall prod"
+
+      android:
+        applicationId: "com.example.banana"
+      ios:
+        bundleId: "com.example.banana"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
