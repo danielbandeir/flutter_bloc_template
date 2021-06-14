@@ -5,9 +5,9 @@ import 'package:secretwall/src/posts/repository/iposts.repository.dart';
 class SavePostUseCase {
   const SavePostUseCase(this.repository);
 
-  final IPostsRepository? repository;
+  final IPostsRepository repository;
 
   Future<Post> execute(Post post) async {
-    return repository!.savePost(post);
+    return repository.savePost(post);
   }
 }

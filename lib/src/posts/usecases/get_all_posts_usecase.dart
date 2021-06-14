@@ -5,9 +5,9 @@ import 'package:secretwall/src/posts/repository/iposts.repository.dart';
 class GetAllPostsUseCase {
   const GetAllPostsUseCase(this.repository);
 
-  final IPostsRepository? repository;
+  final IPostsRepository repository;
 
   Future<List<Post>> execute() async {
-    return repository!.getAllPosts();
+    return repository.getAllPosts();
   }
 }

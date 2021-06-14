@@ -7,13 +7,13 @@ import 'package:secretwall/src/shared/data/constants/string.dart';
 
 /// Repository to model the data before send to the service pattern to make request
 class PostRepository implements IPostsRepository {
-  const PostRepository({this.service});
+  const PostRepository({required this.service});
 
-  final IPostsService? service; 
+  final IPostsService service; 
 
   @override
   Future<List<Post>> getAllPosts() async {
-    final Response<List<dynamic>> response = await service!.getAllPosts();
+    final Response<List<dynamic>> response = await service.getAllPosts();
 
     final List<dynamic> posts = response.data!;
 
@@ -26,9 +26,9 @@ class PostRepository implements IPostsRepository {
   Future<Post> savePost(Post post) async {
     post.creationDate = DateFormat(commonDateFormat).format(DateTime.now());
 
-    final Response<dynamic>? response = await service!.savePost(post);
+    final Response<dynamic> response = await service.savePost(post);
 
-    return Post.fromJson(response!.data! as Map<String, dynamic>);
+    return Post.fromJson(response.data as Map<String, dynamic>);
   }
 
 }

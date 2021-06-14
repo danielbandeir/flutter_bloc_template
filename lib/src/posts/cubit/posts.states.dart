@@ -26,9 +26,9 @@ class PostLoading implements PostsStates {
 
 /// State that is used to call success layer
 class PostSuccess implements PostsStates {
-  const PostSuccess({this.posts});
+  const PostSuccess({required this.posts});
 
-  final List<Post>? posts;
+  final List<Post> posts;
 
   @override
   List<Object?> get props => <Object?>[posts];

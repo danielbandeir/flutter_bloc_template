@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +7,8 @@ class ShowPostsLoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Platform.isAndroid ? const CircularProgressIndicator() : const CupertinoActivityIndicator(),
+    return const Center(
+      child: CircularProgressIndicator.adaptive(),
     );
   }
 }

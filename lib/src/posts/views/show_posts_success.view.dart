@@ -6,9 +6,9 @@ import 'package:secretwall/src/posts/data/models/post.dart';
 
 /// Success view afetr success to get the posts or make any post
 class ShowPostsSuccessView extends StatelessWidget {
-  const ShowPostsSuccessView({ Key? key, this.posts }) : super(key: key);
+  const ShowPostsSuccessView({ Key? key, required this.posts }) : super(key: key);
 
-  final List<Post>? posts;
+  final List<Post> posts;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ShowPostsSuccessView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: List<Widget>.generate(posts!.length, (int index) => Container(
+            children: List<Widget>.generate(posts.length, (int index) => Container(
               decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(width: kOne, color: Colors.black)
@@ -30,7 +30,7 @@ class ShowPostsSuccessView extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: k22),
                     child: Text(
-                      posts![index].text!,
+                      posts[index].text!,
                       textAlign: TextAlign.left,
                     ),
                   ),

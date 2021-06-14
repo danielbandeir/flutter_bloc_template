@@ -3,18 +3,42 @@
 // import 'package:mocktail/mocktail.dart';
 // import 'package:secretwall/src/posts/cubit/posts.cubit.dart';
 // import 'package:secretwall/src/posts/cubit/posts.states.dart';
+// import 'package:secretwall/src/posts/data/models/post.dart';
+// import 'package:secretwall/src/posts/repository/impl/posts.repository.dart';
+// import 'package:secretwall/src/posts/usecases/get_all_posts_usecase.dart';
 
 // /// Mocked posts cubit
-// class MockPostCubit extends MockCubit<PostsStates> implements PostsCubit {}
+// class MockPostCubit extends MockCubit<PostsStates> implements PostsCubit {
+//   @override
+//   Future<void> getAllPosts() async {
+//     emit(PostLoading());
+
+//     emit(PostSuccess(posts: <Post>[
+//       Post(
+//         creationDate: '',
+//         id: 1,
+//         text: 'Testando'
+//       )
+//     ]));
+//   }
+// }
+
+// /// Mock repository
+// class MockPostsRepository extends Mock implements PostRepository {}
 
 // class PostsStatesFake extends Fake implements PostsStates {}
 
 // void main() {
 //   group('Cubit Tests', () {
 //     late PostsCubit cubit;
+//     late PostRepository repository;
 
 //     setUp(() {
-//       cubit = MockPostCubit();
+//       repository = MockPostsRepository();
+//       cubit = PostsCubit(
+//         PostLoading(),
+//         getAllPostsUseCase: GetAllPostsUseCase(repository),
+//       );
 //     });
 
 //     setUpAll(() {
@@ -27,11 +51,11 @@
 //     );
 //     blocTest<PostsCubit, PostsStates>('Get all posts states', 
 //       build: () => cubit,
-//       act: (PostsCubit cubit) => cubit.getAllPosts(),
+//       act: (PostsCubit cubit) {
+//         when(repository.getAllPosts())
+//       },
 //       wait: const Duration(seconds: 2),
 //       expect: () => <dynamic>[PostLoading, PostSuccess]
 //     );
 //   });
 // }
-
-void main() {}

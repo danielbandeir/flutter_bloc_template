@@ -6,19 +6,19 @@ import 'package:secretwall/src/posts/service/iposts.service.dart';
 /// Service to request all the posts and to save post
 class PostService implements IPostsService {
   PostService({
-    this.http
+    required this.http
   });
   
-  late Dio? http;
+  final Dio http;
 
   @override
   Future<Response<List<dynamic>>> getAllPosts() async {
-    return http!.get(PostsEndpoints.getAllPosts);
+    return http.get(PostsEndpoints.getAllPosts);
   }
 
   @override
-  Future<Response<Map<String, dynamic>>?> savePost(Post post) {
-    return http!.post(PostsEndpoints.savePost, data: post.toJson());
+  Future<Response<Map<String, dynamic>>> savePost(Post post) {
+    return http.post(PostsEndpoints.savePost, data: post.toJson());
   }
 
 }

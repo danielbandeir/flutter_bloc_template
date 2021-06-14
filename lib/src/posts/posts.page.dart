@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:secretwall/src/posts/cubit/posts.cubit.dart';
 import 'package:secretwall/src/posts/cubit/posts.states.dart';
 import 'package:secretwall/src/posts/data/constants/string.dart';
@@ -21,7 +21,7 @@ class PostsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Posts services to require the data
     final IPostsService postsService = PostService(
-      http: Provider.of<Dio>(context)
+      http: RepositoryProvider.of<Dio>(context)
     );
     /// Posts repository to model the data
     final IPostsRepository postsRepository = PostRepository(
@@ -32,7 +32,8 @@ class PostsPage extends StatelessWidget {
     return BlocProvider<PostsCubit>(
       create: (BuildContext context) => PostsCubit(
         PostInitial(),
-        navigator: Provider.of<GlobalKeys>(context, listen: false).navigatorState,
+        toast: RepositoryProvider.of<FToast>(context, listen: false),
+        navigator: RepositoryProvider.of<GlobalKeys>(context, listen: false).navigatorState,
         getAllPostsUseCase: GetAllPostsUseCase(postsRepository),
         savePostUseCase: SavePostUseCase(postsRepository),
       ),
