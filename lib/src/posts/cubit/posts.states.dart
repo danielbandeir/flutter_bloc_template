@@ -1,5 +1,3 @@
-
-
 import 'package:equatable/equatable.dart';
 import 'package:secretwall/src/posts/data/models/post.dart';
 

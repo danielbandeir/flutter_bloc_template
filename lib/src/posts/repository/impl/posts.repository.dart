@@ -9,7 +9,7 @@ import 'package:secretwall/src/shared/data/constants/string.dart';
 class PostRepository implements IPostsRepository {
   const PostRepository({required this.service});
 
-  final IPostsService service; 
+  final IPostsService service;
 
   @override
   Future<List<Post>> getAllPosts() async {
@@ -17,8 +17,10 @@ class PostRepository implements IPostsRepository {
 
     final List<dynamic> posts = response.data!;
 
-    final List<Post> returnPosts = posts.map((dynamic post) => Post.fromJson(post as Map<String, dynamic>)).toList();
-    
+    final List<Post> returnPosts = posts
+        .map((dynamic post) => Post.fromJson(post as Map<String, dynamic>))
+        .toList();
+
     return returnPosts;
   }
 
@@ -30,5 +32,4 @@ class PostRepository implements IPostsRepository {
 
     return Post.fromJson(response.data as Map<String, dynamic>);
   }
-
 }

@@ -20,8 +20,7 @@ class PostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Posts services to require the data
-    final IPostsService postsService =
-        PostService(http: context.read<Dio>());
+    final IPostsService postsService = PostService(http: context.read<Dio>());
 
     /// Posts repository to model the data
     final IPostsRepository postsRepository =
@@ -35,7 +34,8 @@ class PostsPage extends StatelessWidget {
           PostInitial(),
           toast: context.read<FToast>(),
           navigator: context.read<GlobalKeys>().navigatorState,
-          getAllPostsUseCase: GetAllPostsUseCase(context.read<IPostsRepository>()),
+          getAllPostsUseCase:
+              GetAllPostsUseCase(context.read<IPostsRepository>()),
           savePostUseCase: SavePostUseCase(context.read<IPostsRepository>()),
         ),
         child: const MaterialApp(

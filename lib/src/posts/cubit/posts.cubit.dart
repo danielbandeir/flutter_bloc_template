@@ -12,7 +12,12 @@ import 'package:secretwall/src/shared/widgets/toast.dart';
 
 /// Here is where we create the logic about posts
 class PostsCubit extends Cubit<PostsStates> {
-  PostsCubit(PostsStates initialState, {required this.getAllPostsUseCase,required this.savePostUseCase, required this.navigator, required this.toast}) : super(initialState);
+  PostsCubit(PostsStates initialState,
+      {required this.getAllPostsUseCase,
+      required this.savePostUseCase,
+      required this.navigator,
+      required this.toast})
+      : super(initialState);
 
   /// Key to make navigation inside cubit
   final GlobalKey<NavigatorState> navigator;
@@ -59,13 +64,11 @@ class PostsCubit extends Cubit<PostsStates> {
 
     navigator.currentState!.pop();
 
-      await Future<dynamic>.delayed(Duration(seconds: kOne.toInt()));
+    await Future<dynamic>.delayed(Duration(seconds: kOne.toInt()));
 
     try {
-      await savePostUseCase.execute(Post(
-        text: text
-      ));
-      
+      await savePostUseCase.execute(Post(text: text));
+
       final List<Post> posts = await getAllPostsUseCase.execute();
 
       emit(PostSuccess(posts: posts));

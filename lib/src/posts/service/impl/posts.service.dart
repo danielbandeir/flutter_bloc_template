@@ -5,10 +5,8 @@ import 'package:secretwall/src/posts/service/iposts.service.dart';
 
 /// Service to request all the posts and to save post
 class PostService implements IPostsService {
-  PostService({
-    required this.http
-  });
-  
+  PostService({required this.http});
+
   final Dio http;
 
   @override
@@ -20,5 +18,4 @@ class PostService implements IPostsService {
   Future<Response<Map<String, dynamic>>> savePost(Post post) {
     return http.post(PostsEndpoints.savePost, data: post.toJson());
   }
-
 }

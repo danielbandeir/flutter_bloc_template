@@ -9,7 +9,6 @@ const String showPostsErrorViewKey = 'ShowPostsErrorViewKey';
 const String showPostsInitialViewKey = 'ShowPostsInitialViewKey';
 const String showPostsInitialErrorViewKey = 'ShowPostsInitialErrorViewKey';
 
-
 /// Texts
 const String saveUpperCase = 'SAVE';
 const String newPost = 'New Post';

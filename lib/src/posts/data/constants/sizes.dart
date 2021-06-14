@@ -1,4 +1,4 @@
-/// Constant numeric values to use in project 
+/// Constant numeric values to use in project
 const double kOne = 1;
 const double kTwo = 2;
 const double kFive = 5;

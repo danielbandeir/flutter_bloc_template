@@ -45,11 +45,11 @@
 //       registerFallbackValue<PostsStates>(PostsStatesFake());
 //     });
 
-//     blocTest<PostsCubit, PostsStates>('Emit any state when call cubit', 
+//     blocTest<PostsCubit, PostsStates>('Emit any state when call cubit',
 //       build: () => cubit,
 //       expect: () => <dynamic>[]
 //     );
-//     blocTest<PostsCubit, PostsStates>('Get all posts states', 
+//     blocTest<PostsCubit, PostsStates>('Get all posts states',
 //       build: () => cubit,
 //       act: (PostsCubit cubit) {
 //         when(repository.getAllPosts())

@@ -21,7 +21,8 @@ class ShowPostsPage extends StatelessWidget {
         title: const Text(appName),
         actions: <Widget>[
           IconButton(
-              onPressed: () => addPostView(context, postsCubit), icon: const Icon(Icons.add))
+              onPressed: () => addPostView(context, postsCubit),
+              icon: const Icon(Icons.add))
         ],
       ),
       body: BlocBuilder<PostsCubit, PostsStates>(
@@ -30,23 +31,20 @@ class ShowPostsPage extends StatelessWidget {
           if (state is PostInitial) {
             /// If is initial state, means that doesn't have any posts, so we'll call the posts
             postsCubit.getAllPosts();
-            
+
             return const ShowPostsLoadingView(
               key: Key(showPostsInitialViewKey),
             );
-          } 
-          else if (state is PostLoading) {
+          } else if (state is PostLoading) {
             return const ShowPostsLoadingView(
               key: Key(showPostsLoadingViewKey),
             );
-          }
-          else if (state is PostSuccess) {
+          } else if (state is PostSuccess) {
             return ShowPostsSuccessView(
               posts: state.posts,
               key: const Key(showPostsSuccessViewKey),
             );
-          }
-          else if (state is PostError) {
+          } else if (state is PostError) {
             return ShowPostsErrorView(
               error: state.error ?? genericErrorMessage,
               key: const Key(showPostsErrorViewKey),
@@ -61,6 +59,4 @@ class ShowPostsPage extends StatelessWidget {
       ),
     );
   }
-
-  
 }

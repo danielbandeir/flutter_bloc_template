@@ -5,7 +5,7 @@ import 'package:secretwall/src/shared/data/constants/string.dart';
 
 /// Error widget to show in show when error is open
 class ShowPostsErrorView extends StatelessWidget {
-  const ShowPostsErrorView({ Key? key, this.error }) : super(key: key);
+  const ShowPostsErrorView({Key? key, this.error}) : super(key: key);
 
   final String? error;
 
