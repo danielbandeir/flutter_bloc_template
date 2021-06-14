@@ -10,12 +10,11 @@ class SecretWall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     /// Get Global Key injected in main.dart
-    final GlobalKeys _globalKeys = RepositoryProvider.of<GlobalKeys>(context);
+    final GlobalKeys _globalKeys = context.read<GlobalKeys>();
 
     /// Get global instance toast to init
-    final FToast toast = RepositoryProvider.of<FToast>(context);
+    final FToast toast = context.read<FToast>();
 
     /// Init toast instance
     toast.init(context);

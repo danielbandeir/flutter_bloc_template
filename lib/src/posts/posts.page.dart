@@ -20,30 +20,32 @@ class PostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Posts services to require the data
-    final IPostsService postsService = PostService(
-      http: RepositoryProvider.of<Dio>(context)
-    );
+    final IPostsService postsService =
+        PostService(http: context.read<Dio>());
+
     /// Posts repository to model the data
-    final IPostsRepository postsRepository = PostRepository(
-      service: postsService
-    );
+    final IPostsRepository postsRepository =
+        PostRepository(service: postsService);
 
     /// Inject provider for his module
-    return BlocProvider<PostsCubit>(
-      create: (BuildContext context) => PostsCubit(
-        PostInitial(),
-        toast: RepositoryProvider.of<FToast>(context, listen: false),
-        navigator: RepositoryProvider.of<GlobalKeys>(context, listen: false).navigatorState,
-        getAllPostsUseCase: GetAllPostsUseCase(postsRepository),
-        savePostUseCase: SavePostUseCase(postsRepository),
-      ),
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: postsModuleName,
-        home: Scaffold(
-          backgroundColor: Colors.black,
-          body: ShowPostsPage(
-            key: Key(showPostsKey),
+    return RepositoryProvider<IPostsRepository>(
+      create: (BuildContext context) => postsRepository,
+      child: BlocProvider<PostsCubit>(
+        create: (BuildContext context) => PostsCubit(
+          PostInitial(),
+          toast: context.read<FToast>(),
+          navigator: context.read<GlobalKeys>().navigatorState,
+          getAllPostsUseCase: GetAllPostsUseCase(context.read<IPostsRepository>()),
+          savePostUseCase: SavePostUseCase(context.read<IPostsRepository>()),
+        ),
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: postsModuleName,
+          home: Scaffold(
+            backgroundColor: Colors.black,
+            body: ShowPostsPage(
+              key: Key(showPostsKey),
+            ),
           ),
         ),
       ),
