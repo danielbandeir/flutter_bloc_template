@@ -53,7 +53,7 @@ flavorizr:
     ios:
 
   flavors:
-    dev:
+    DEV:
       app:
         name: "SecretWall dev"
 
@@ -63,7 +63,7 @@ flavorizr:
       ios:
         bundleId: "com.example.apple"
 
-    qa:
+    QA:
       app:
         name: "SecretWall qa"
 
@@ -73,7 +73,7 @@ flavorizr:
       ios:
         bundleId: "com.example.apple"
 
-    prod:
+    PROD:
       app:
         name: "SecretWall prod"
 

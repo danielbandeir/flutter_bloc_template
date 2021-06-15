@@ -1,8 +1,9 @@
 import 'package:secretwall/src/shared/data/constants/base_endpoint.dart';
 
+// ignore: avoid_classes_with_only_static_members
 /// Endpoints just for post module
 class PostsEndpoints {
-  static const String getAllPosts = '${BaseEndpoint.url}/posts';
+  static String getAllPosts = '${BaseEndpoint.url}/posts';
   static String getPostById(String id) => '${BaseEndpoint.url}/posts/$id';
-  static const String savePost = '${BaseEndpoint.url}/posts';
+  static String savePost = '${BaseEndpoint.url}/posts';
 }

@@ -14,3 +14,6 @@ const String oopsErrorMessage = 'Ooops...';
 
 /// Format
 const String commonDateFormat = 'yyyy-MM-dd kk:mm';
+
+/// Flavors constants
+const String baseUrl = 'baseUrl';
