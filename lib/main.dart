@@ -7,6 +7,7 @@ import 'package:secretwall/src/shared/utils/flavors.dart';
 
 void main() {
   F.appFlavor = Flavor.PROD;
+
   /// Inject global providers before the widget tree
   runApp(MultiRepositoryProvider(
       providers: globalProviders,
