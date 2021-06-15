@@ -6,7 +6,7 @@ import 'package:secretwall/src/shared/data/constants/string.dart';
 import 'package:secretwall/src/shared/utils/flavors.dart';
 
 void main() {
-  F.appFlavor = Flavor.PROD;
+  F.appFlavor = Flavor.QA;
   /// Inject global providers before the widget tree
   runApp(MultiRepositoryProvider(
       providers: globalProviders,
