@@ -1,10 +1,6 @@
 version: 2
 jobs:
   test_app:
-    # filters:
-    #   branches:
-    #     only:
-    #       - develop
     docker:
       - image: cirrusci/flutter:latest
     steps:
