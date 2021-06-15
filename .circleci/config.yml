@@ -9,7 +9,20 @@ jobs:
       - image: cirrusci/flutter:latest
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - run: echo "Starting test process" # run the `echo` command
+      - run: flutter pub get
+      - run: flutter test
+
+  build_app:
+    filters:
+      branches:
+        only:
+          - master
+    docker:
+      - image: cirrusci/flutter:latest
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "Starting build process" # run the `echo` command
       - run: flutter pub get
       - run: flutter test
 
@@ -18,3 +31,6 @@ workflows:
   build_and_test:
     jobs:
       - test_app
+      - build_app:
+          requires:
+            - test_app
