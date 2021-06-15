@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  test_app:
+    # filters:
+    #   branches:
+    #     only:
+    #       - develop
+    docker:
+      - image: cirrusci/flutter:latest
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+      - run: flutter pub get
+      - run: flutter test
