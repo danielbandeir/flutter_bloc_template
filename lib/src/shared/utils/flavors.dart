@@ -1,3 +1,4 @@
+import 'package:secretwall/src/shared/data/models/environment.dart';
 import 'package:secretwall/src/shared/utils/dev_flavors.dart';
 import 'package:secretwall/src/shared/utils/prod_flavors.dart';
 import 'package:secretwall/src/shared/utils/qa_flavors.dart';
@@ -12,16 +13,16 @@ enum Flavor {
 class F {
   static late Flavor appFlavor;
 
-  static Map<String, dynamic> get environment {
+  static Environment get environment {
     switch (appFlavor) {
       case Flavor.DEV:
-        return devFlavors;
+        return Environment.fromJson(devFlavors);
       case Flavor.QA:
-        return qaFlavors;
+        return Environment.fromJson(qaFlavors);
       case Flavor.PROD:
-        return prodFlavors;
+        return Environment.fromJson(prodFlavors);
       default:
-        return prodFlavors;
+        return Environment.fromJson(prodFlavors);
     }
   }
 }
