@@ -1,4 +1,13 @@
 version: 2
+executors:
+  android-flutter:
+    docker:
+      - image: gmemstr/flutter-fastlane:latest
+    environment:
+      TERM: dumb
+      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
+
 jobs:
   test_app:
     docker:
@@ -10,17 +19,12 @@ jobs:
       - run: flutter test
 
   build_app:
-    filters:
-      branches:
-        only:
-          - master
-    docker:
-      - image: cirrusci/flutter:latest
+    executor: android-flutter
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "Starting build process" # run the `echo` command
-      - run: flutter pub get
-      - run: flutter test
+      - checkout
+      # - run: echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > key.jks
+      # - run: echo "$PLAY_STORE_UPLOAD_KEY_INFO" | base64 --decode > android/key.properties
+      - run: cd android && fastlane upload_appcenter
 
 workflows:
   version: 2
@@ -28,5 +32,8 @@ workflows:
     jobs:
       - test_app
       - build_app:
+          filters:
+            branches:
+              only: master
           requires:
             - test_app
