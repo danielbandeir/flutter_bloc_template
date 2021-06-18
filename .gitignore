@@ -46,3 +46,4 @@ app.*.map.json
 /android/app/release
 .gitsecret/keys/random_seed
 !*.secret
+lib/src/shared/utils/dev_flavors.dartlib/src/shared/utils/prod_flavors.dartlib/src/shared/utils/qa_flavors.dart
