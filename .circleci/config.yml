@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+orbs:
+  android: "1.0.3"
+
 jobs:
   test_app:
     docker:
@@ -23,20 +27,25 @@ jobs:
           path: build/app/outputs/apk/release/app-release.apk
 
   upload_app_center:
-    executor: android/android-machine
+    # macos:
+    #   xcode: "11.3"
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: upload_app_center
+    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
+      - restore_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path vendor/bundle
+      - save_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run:
-          name: Enter fastlane
-          command: cd android
-      - run:
-         command: ./gradlew build
-      - run:
-          name: Install fastlane
-          command: bundle install
-      - run:
-          name: Execute fastlane
-          command: bundle exec fastlane upload_appcenter
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
 
 workflows:
   version: 2
