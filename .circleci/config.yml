@@ -23,7 +23,7 @@ jobs:
           path: build/app/outputs/apk/release/app-release.apk
 
   upload_app_center:
-    executor: android/android
+    name: android/android-machine
     steps:
       - checkout
       - run:
