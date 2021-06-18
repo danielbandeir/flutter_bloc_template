@@ -27,8 +27,8 @@ jobs:
           path: build/app/outputs/apk/release/app-release.apk
 
   upload_app_center:
-    # macos:
-    #   xcode: "11.3"
+    macos:
+      xcode: "11.3"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
