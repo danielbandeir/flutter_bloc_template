@@ -38,17 +38,21 @@ platform :android do
 
 desc "Deploy a new QA build to APPCenter"
 lane :upload_appcenter do
+
+  before_all do
+    setup_circle_ci
+  end
   # Here we are using the CircleCI job number
   # for the build number
   increment_build_number(
     build_number: "$CIRCLE_BUILD_NUM"
   )
 
-  build_number = number_of_commits()
-  Dir.chdir "../.." do
-  sh("flutter", "pub", "get")
-  sh("flutter", "clean")
-  sh("flutter", "build", "appbundle", "--build-number=#{build_number}")
+  # build_number = number_of_commits()
+  # Dir.chdir "../.." do
+  # sh("flutter", "pub", "get")
+  # sh("flutter", "clean")
+  # sh("flutter", "build", "appbundle", "--build-number=#{build_number}")
 
   # Set up the required information to upload the
   # app binary to VS App Center

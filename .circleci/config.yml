@@ -1,13 +1,4 @@
 version: 2
-executors:
-  android-flutter:
-    docker:
-      - image: gmemstr/flutter-fastlane:latest
-    environment:
-      TERM: dumb
-      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
-
 jobs:
   test_app:
     docker:
@@ -18,22 +9,50 @@ jobs:
       - run: flutter pub get
       - run: flutter test
 
-  build_app:
-    executor: android-flutter
+  build_app_android:
+    docker:
+      - image: cirrusci/flutter:latest
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "Starting build android process" # run the `echo` command
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build apk --build-number=${CIRCLE_BUILD_NUM}
+
+      - store_artifacts:
+          path: build/app/outputs/apk/release/app-release.apk
+
+  upload_app_center:
+    executor: android/android
     steps:
       - checkout
-      # - run: echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > key.jks
-      # - run: echo "$PLAY_STORE_UPLOAD_KEY_INFO" | base64 --decode > android/key.properties
-      - run: cd android && fastlane upload_appcenter
+      - run:
+          name: Enter fastlane
+          command: cd android
+     - run:
+         command: ./gradlew build
+      - run:
+          name: Install fastlane
+          command: bundle install
+      - run:
+          name: Execute fastlane
+          command: bundle exec fastlane upload_appcenter
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - test_app
-      - build_app:
+      - build_app_android:
           filters:
             branches:
               only: master
           requires:
             - test_app
+      - upload_app_center:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test_app
+            - build_app_android
