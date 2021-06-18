@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Enter fastlane
           command: cd android
-     - run:
+      - run:
          command: ./gradlew build
       - run:
           name: Install fastlane
