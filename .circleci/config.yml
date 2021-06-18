@@ -1,8 +1,4 @@
 version: 2.1
-
-orbs:
-  android: "1.0.3"
-
 jobs:
   test_app:
     docker:
