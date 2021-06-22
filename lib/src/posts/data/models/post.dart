@@ -5,11 +5,11 @@ part 'post.g.dart';
 /// Post model
 @JsonSerializable()
 class Post {
-  Post({this.id, this.text, this.creationDate});
+  Post({this.id,required this.text, this.creationDate});
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
   final int? id;
-  final String? text;
+  final String text;
   @JsonKey(name: 'creation-date')
   String? creationDate;
 

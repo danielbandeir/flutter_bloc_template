@@ -9,7 +9,7 @@ part of 'post.dart';
 Post _$PostFromJson(Map<String, dynamic> json) {
   return Post(
     id: json['id'] as int?,
-    text: json['text'] as String?,
+    text: json['text'] as String,
     creationDate: json['creation-date'] as String?,
   );
 }

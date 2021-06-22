@@ -31,7 +31,7 @@ class ShowPostsSuccessView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: k22),
                           child: Text(
-                            posts[index].text!,
+                            posts[index].text,
                             textAlign: TextAlign.left,
                           ),
                         ),
