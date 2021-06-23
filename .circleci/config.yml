@@ -28,14 +28,17 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "Starting build android process" # run the `echo` command
-      - run: apt-get update # Update
       - run: gem install fastlane # Install fastlane
-      - run: apt-get install git -y # install git
-      - run: apt-get install gpg -y # install gpg
-      - run: apt-get install gpg-agent -y # install gpg-agent
-      - run: apt-get install -y git-secret # Install git-secret
+      - run: 
+        name: Get dependencies
+        command: |
+          apt-get update 
+          apt-get install git -y
+          apt-get install gpg -y
+          apt-get install gpg-agent -y
+          apt-get install git-secret -y
       - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
-      # - run: gpg --import ./private_key.gpg # import private key
+      # - run: gpg --import ./private_key.gpg # import private key 
       # - run: git-secret reveal -f # reveal files
       - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
       - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
