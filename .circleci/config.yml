@@ -12,11 +12,7 @@ jobs:
       - run: apt-get install gpg-agent -y # install gpg-agent
       - run: apt-get install -y git-secret # Install git-secret
       - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
-
-      - store_artifacts:
-          path: ./private_key.gpg
-
-      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY private_key.gpg # import private key
+      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
       - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
       - run: flutter pub get
       - run: flutter test
@@ -37,11 +33,7 @@ jobs:
       - run: apt-get install gpg-agent -y # install gpg-agent
       - run: apt-get install -y git-secret # Install git-secret
       - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
-
-      - store_artifacts:
-          path: ./private_key.gpg
-
-      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY private_key.gpg # import private key
+      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
       - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
       - run: flutter clean
       - run: flutter pub get
