@@ -29,8 +29,9 @@ jobs:
       - checkout # check out the code in the project directory
       - run: echo "Starting build android process" # run the `echo` command
       - run: gem install fastlane # Install fastlane
-      - run: sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list"
-wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add - # Added git secret 0.4.0
+      - run: |
+          sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list"
+          wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add -
       - run: |
           apt-get update 
           apt-get install git -y
