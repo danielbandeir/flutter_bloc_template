@@ -34,9 +34,9 @@ jobs:
           apt-get install git -y
           apt-get install gpg -y
           apt-get install gpg-agent -y
-      - run: |
-          sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list"
-          wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add -
+      # - run: |
+      #     sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list"
+      #     wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add -
       - run: |
           apt-get update
           apt-get install git-secret -y
