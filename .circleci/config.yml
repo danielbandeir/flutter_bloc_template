@@ -15,7 +15,7 @@ jobs:
       - store_artifacts:
           path: ./private_key.gpg
 
-      - run: gpg --import --passphrase 00141622 ./private_key.gpg # import private key
+      - run: gpg --batch --import --passphrase 00141622 ./private_key.gpg # import private key
       - run: git-secret reveal -f -p 00141622 # reveal files
       - run: flutter pub get
       - run: flutter test
