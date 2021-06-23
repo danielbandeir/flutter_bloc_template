@@ -6,9 +6,10 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "Starting test process" # run the `echo` command
+      - run: apt-get update # Update
       - run: apt-get install git -y # install git
       - run: apt-get install gpg -y # install gpg
-      - run: apt-get install gpg-agent -y # install agent
+      - run: apt-get install gpg-agent -y # install gpg-agent
       - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
 
       - store_artifacts:
