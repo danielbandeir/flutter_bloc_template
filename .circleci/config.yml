@@ -68,12 +68,12 @@ workflows:
   build_and_test:
     jobs:
       - test_app
-      # - build_app_android:
-      #     filters:
-      #       branches:
-      #         only: master
-      #     requires:
-      #       - test_app
+      - build_app_android:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test_app
       # - upload_app_center:
       #     filters:
       #       branches:
