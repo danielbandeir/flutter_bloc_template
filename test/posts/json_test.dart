@@ -33,13 +33,13 @@ void main() {
       const Map<String, dynamic> defaultPost = <String, dynamic>{
         'idS': 2,
         'creation-dateD': '2021-06-02 12:11',
-        'comment': 'This is a post!'
+        'text': 'This is a post!'
       };
 
       final Post postParsed = Post.fromJson(defaultPost);
 
       expect(postParsed.id, isNull);
-      expect(postParsed.text, isNull);
+      expect(postParsed.text, isNotNull);
       expect(postParsed.creationDate, isNull);
     });
   });
