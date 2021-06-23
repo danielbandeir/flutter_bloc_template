@@ -33,7 +33,7 @@ jobs:
   #   working_directory: /Users/distiller/project
   #   environment:
   #     FL_OUTPUT_DIR: output
-  #     FASTLANE_LANE: upload_app_center 
+  #     FASTLANE_LANE: upload_app_center
   #   shell: /bin/bash --login -o pipefail
   #   steps:
   #     - checkout
