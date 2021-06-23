@@ -6,16 +6,16 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "Starting test process" # run the `echo` command
-      - run: apt-get update # Update
-      - run: apt-get install git -y # install git
-      - run: apt-get install gpg -y # install gpg
-      - run: apt-get install gpg-agent -y # install gpg-agent
-      - run: apt-get install -y git-secret # Install git-secret
-      - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
-      # - run: gpg --import ./private_key.gpg # import private key
-      # - run: git-secret reveal -f # reveal files
-      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
-      - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
+      # - run: apt-get update # Update
+      # - run: apt-get install git -y # install git
+      # - run: apt-get install gpg -y # install gpg
+      # - run: apt-get install gpg-agent -y # install gpg-agent
+      # - run: apt-get install -y git-secret # Install git-secret
+      # - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
+      # # - run: gpg --import ./private_key.gpg # import private key
+      # # - run: git-secret reveal -f # reveal files
+      # - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
+      # - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
       - run: flutter pub get
       - run: flutter test
 
@@ -29,6 +29,8 @@ jobs:
       - checkout # check out the code in the project directory
       - run: echo "Starting build android process" # run the `echo` command
       - run: gem install fastlane # Install fastlane
+      - run: sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list"
+wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add - # Added git secret 0.4.0
       - run: |
           apt-get update 
           apt-get install git -y
