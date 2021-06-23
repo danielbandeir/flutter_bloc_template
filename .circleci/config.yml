@@ -40,8 +40,8 @@ jobs:
 
       - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY private_key.gpg # import private key
       - run: git-secret reveal -f -p 00141622 # reveal files
-      - run: flutter pub get
       - run: flutter clean
+      - run: flutter pub get
       - run: flutter build apk --build-number=$CIRCLE_BUILD_NUM
 
       - store_artifacts:
