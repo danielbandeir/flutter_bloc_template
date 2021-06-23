@@ -11,11 +11,11 @@ jobs:
       - run: apt-get install gpg -y # install gpg
       - run: apt-get install gpg-agent -y # install gpg-agent
       - run: apt-get install -y git-secret # Install git-secret
-      - run: echo $GPG_KEY_NO_PASS | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
-      - run: gpg --import ./private_key.gpg # import private key
-      - run: git-secret reveal -f # reveal files
-      # - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
-      # - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
+      - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
+      # - run: gpg --import ./private_key.gpg # import private key
+      # - run: git-secret reveal -f # reveal files
+      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
+      - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
       - run: flutter pub get
       - run: flutter test
 
@@ -34,14 +34,14 @@ jobs:
       - run: apt-get install gpg -y # install gpg
       - run: apt-get install gpg-agent -y # install gpg-agent
       - run: apt-get install -y git-secret # Install git-secret
-      - run: echo $GPG_KEY_NO_PASS | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
-      - run: gpg --import ./private_key.gpg # import private key
-      - run: git-secret reveal -f # reveal files
-      # - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
-      # - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
+      - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
+      # - run: gpg --import ./private_key.gpg # import private key
+      # - run: git-secret reveal -f # reveal files
+      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
+      - run: git-secret reveal -f -p $PASSWORD_GPG_KEY # reveal files
       - run: flutter clean
       - run: flutter pub get
-      - run: flutter build apk --build-number=0
+      - run: flutter build apk --release --flavor prod -t lib/main.dart --build-number=0
 
       - store_artifacts:
           path: build/app/outputs/apk/release/app-release.apk
