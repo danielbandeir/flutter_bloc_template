@@ -8,11 +8,17 @@ jobs:
       - run: echo "Starting test process" # run the `echo` command
       - run: apt-get install git -y # install git
       - run: apt-get install gpg -y # install gpg
+      - run: apt-get install gpg-agent -y # install agent
       - run: echo $GPG_KEY | tr ',' '\n' > ./private_key.gpg # Create private key by environment variable
+
+      - store_artifacts:
+          path: ./private_key.gpg
+
       - run: gpg --import --passphrase 00141622 ./private_key.gpg # import private key
       - run: git-secret reveal -f -p 00141622 # reveal files
       - run: flutter pub get
       - run: flutter test
+
 
   # build_app_android:
   #   docker:
