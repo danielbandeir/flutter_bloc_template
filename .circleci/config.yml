@@ -29,9 +29,7 @@ jobs:
       - checkout # check out the code in the project directory
       - run: echo "Starting build android process" # run the `echo` command
       - run: gem install fastlane # Install fastlane
-      - run: 
-        name: Get dependencies
-        command: |
+      - run: |
           apt-get update 
           apt-get install git -y
           apt-get install gpg -y
