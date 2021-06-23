@@ -16,24 +16,31 @@ jobs:
       - store_artifacts:
           path: ./private_key.gpg
 
-      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY ./private_key.gpg # import private key
+      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY private_key.gpg # import private key
       - run: git-secret reveal -f -p 00141622 # reveal files
       - run: flutter pub get
       - run: flutter test
 
 
-  # build_app_android:
-  #   docker:
-  #     - image: cirrusci/flutter:latest
-  #   steps:
-  #     - checkout # check out the code in the project directory
-  #     - run: echo "Starting build android process" # run the `echo` command
-  #     - run: flutter pub get
-  #     - run: flutter clean
-  #     - run: flutter build apk --build-number=${CIRCLE_BUILD_NUM}
+  build_app_android:
+    docker:
+      - image: cirrusci/flutter:latest
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "Starting build android process" # run the `echo` command
+      - run: apt-get update # Update
+      - run: apt-get install git -y # install git
+      - run: apt-get install gpg -y # install gpg
+      - run: apt-get install gpg-agent -y # install gpg-agent
+      - run: apt-get install -y git-secret # Install git-secret
+      - run: gpg --batch --import --passphrase $PASSWORD_GPG_KEY private_key.gpg # import private key
+      - run: git-secret reveal -f -p 00141622 # reveal files
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build apk --build-number=${CIRCLE_BUILD_NUM}
 
-  #     - store_artifacts:
-  #         path: build/app/outputs/apk/release/app-release.apk
+      - store_artifacts:
+          path: build/app/outputs/apk/release/app-release.apk
 
   # upload_app_center:
   #   macos:
